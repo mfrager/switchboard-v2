@@ -131,9 +131,9 @@ impl AggregatorAccountData {
     ///
     /// let data_feed = AggregatorAccountData::new(feed_account_info)?;
     /// ```
-    pub fn new<'info>(
-        switchboard_feed: &'info AccountInfo<'info>,
-    ) -> anchor_lang::Result<Ref<'info, AggregatorAccountData>> {
+    pub fn new<'c, 'info>(
+        switchboard_feed: &'c AccountInfo<'info>,
+    ) -> anchor_lang::Result<Ref<'c, AggregatorAccountData>> {
         let data = switchboard_feed.try_borrow_data()?;
         if data.len() < AggregatorAccountData::discriminator().len() {
             return Err(ErrorCode::AccountDiscriminatorNotFound.into());
